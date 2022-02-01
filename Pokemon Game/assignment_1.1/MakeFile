@@ -1,0 +1,8 @@
+All: map
+
+map: map.c
+	gcc ./map.c -o map -Wall -Werror
+
+clean:
+	rm -f All *~ *.o core
+	echo Clean done
