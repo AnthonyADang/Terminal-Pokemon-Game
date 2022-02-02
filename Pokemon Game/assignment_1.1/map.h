@@ -1,42 +1,61 @@
+#ifndef map_h
+#define map_h
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <time.h>
+#include <stdbool.h>
 
-#define False 0
-#define True 1
+// Max dimensions for map output
+#define MAP_X 80
+#define MAP_Y 21
 
-#define max_X 80
-#define max_Y 21
+//#define mappair(pair) (map->map[pair[dim_y]][pair[dim_x]])
+#define mapxy(x,y)(m->map[y][x])
+// Returns random int between min and max
+#define rand_range(min,max) ((rand() % ((max + 1) - min)) + min)
 
-#define PATH '#'
-#define GRASS ','
-#define ROCK '%'
-#define EXIT 'e'
-#define TREE '"'
-#define CLEARING ' '
+typedef struct terrain
+{
+    uint8_t x;
+    uint8_t y;
+} terrain_t;
 
-typedef enum __attribute__((__packed__)) terrain_type
+typedef struct location
+{
+    uint8_t x;
+    uint8_t y;
+} location_t;
+
+typedef enum __attribute__ ((__packed__)) terrain_type
 {
     ter_debug,
     ter_boulder,
     ter_tree,
+    ter_path,
     ter_grass,
     ter_clearing,
-    ter_path,
+    ter_mixed,
     ter_mart,
     ter_center,
+    ter_exit,
+    empty
 } terrain_type_t;
-
-typedef struct exit
-{
-    uint8_t x;
-    uint8_t y;
-} exit_t;
 
 typedef struct map
 {
-    char map[max_Y][max_X];
+    terrain_type_t map[MAP_Y][MAP_X];
+    location_t *exits;
+    uint16_t num_terrain;
 } map_t;
 
-void assign_border(map_t *map);
+bool is_valid(map_t *m, int x, int y);
+void create_border(map_t *m);
+void create_exits(map_t *m);
+void expand_terrain(map_t *m, int x, int y);
+void create_terrain(map_t *m);
+
+void create_paths(map_t *m);
+
+#endif

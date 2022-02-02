@@ -1,0 +1,8 @@
+COM S 327 Poke-dungeon Terminal Game
+
+## Assignment 1.1 Terrain Generation
+    In this iteration of the project, I created the base skeleton of the map
+    by generating the map borders, terrain(grass, clearings, rocks/boulders,
+    trees, paths, pokemon centers, pokemon marts, and exits. Seeds for each
+    terrain type is generated randomly and grown outwardly. Paths are then
+    generated between exits N-S and W-E.
