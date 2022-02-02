@@ -1,21 +1,30 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-**FORMAT**
-## [Version] - YYYY-MM-DD
-### Added
-### Changed
-### Removed
-### BUGS
-**END FORMAT**
+commit f4929cbe3aa2f6d718a55f398e9df39c47399d71 (HEAD -> assignment1.1, origin/assignment1.1)
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 2 17:18:49 2022 -0600
 
-## [1.1.0] - 2022-01-31 ------------------------------------------------------
-### Added
-- README, CHANGELOG, MakeFile to project
-- Created map. c and map.h files for map creation/generation
-### Changed
-- no changes
-### Removed
-- no changes
-### BUGS
-- none documented
+    Updated map generation methods
+
+    map.c can now print out map border, terrain seed locations, and paths. There are some bugs with path generation that causes characters to shift out of frame. Some methods like  create terrain still are not functioning. Create paths method needs to be refactored.
+
+commit 444ea216956f348d9a4861beb13f4ab8996ea826
+Author: adang <adang@iastate.edu>
+Date:   Mon Jan 31 21:51:47 2022 -0600
+
+    Update CHANGELOG
+
+commit 602e46c32a1015bbd9c20895c5cfb6c294074df9
+Author: adang <adang@iastate.edu>
+Date:   Mon Jan 31 21:45:15 2022 -0600
+
+    Added changelog
+
+    Added changelog
+
+commit 306b31a76b1fb7c00ac4f732a04dbb9de06628fb (origin/main, origin/assignment1.2, origin/HEAD, main, assignment1.2)
+Author: adang <adang@iastate.edu>
+Date:   Mon Jan 31 21:30:11 2022 -0600
+
+    Created project. Added MakeFile, README, map.c, map.h files
