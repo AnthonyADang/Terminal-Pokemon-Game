@@ -3,9 +3,12 @@
 void generate_map(map_t *m)
 {
     create_border(m);
-    create_terrain(m);
+    generate_terrain_seeds(m);
+    create_all_terrain(m);
     create_exits(m);
     create_paths(m);
+    create_mart(m);
+    create_center(m);
 }
 
 void print_dungeon(map_t *m)
@@ -90,31 +93,145 @@ bool is_valid(map_t *m, int x, int y)
     return false;
 }
 
-void generate_seeds(map_t *m) {
+void generate_terrain_seeds(map_t *m) {
     int i;
-    int randX;
-    int randY;
+    int randX, randY;
+    int randWidth, randHeight;
     int num_grass, num_clearing, num_mixed;
 
-    num_grass = rand() % 4 + 2;
-    num_clearing = rand() % 4 + 2;
-    num_mixed = rand() % 4 + 2;
+    num_grass = m->num_grass = rand() % 4 + 2;
+    num_clearing = m->num_clearing = rand() % 4 + 2;
+    num_mixed = m->num_mixed= rand() % 4 + 2;
 
     int num_terrain = m->num_terrain = num_grass + num_clearing + num_mixed;
 
-    for(i = 0; i < num_terrain; i++){
-        int randX = rand_range(1,MAP_X - 2);
-        int randY = rand_range(1,MAP_Y - 2);
-        if(is_valid(m,randX, randY)){
-            if(i >= 0 && i < num_grass) {
-                mapxy(randX,randY) = ter_grass;
-            }
-            if(i >=num_grass && i < num_clearing + num_grass) {
-                mapxy(randX,randY) = ter_clearing;
-            }
-            if(i >=(num_clearing + num_grass) && i < num_terrain) {
-                mapxy(randX,randY) = ter_mixed;
-            }
+    for (i = 0; i < num_grass; i++) {
+        randX = rand_range(1, MAP_X - 2);
+        randY = rand_range(1, MAP_Y - 2);
+        randWidth = rand_range(REGION_MIN_X, REGION_MAX_X);;
+        randHeight = rand_range(REGION_MIN_Y, REGION_MAX_Y);;
+        switch (i) {
+            case 0:
+                mapxy(randX, randY) = ter_grass;
+                m->grass1.x = randX;
+                m->grass1.y = randY;
+                m->grass1.width = randWidth;
+                m->grass1.height = randHeight;
+                break;
+            case 1:
+                mapxy(randX, randY) = ter_grass;
+                m->grass2.x = randX;
+                m->grass2.y = randY;
+                m->grass2.width = randWidth;
+                m->grass2.height = randHeight;
+                break;
+            case 2:
+                mapxy(randX, randY) = ter_grass;
+                m->grass3.x = randX;
+                m->grass3.y = randY;
+                m->grass3.width = randWidth;
+                m->grass3.height = randHeight;
+                break;
+            case 3:
+                mapxy(randX, randY) = ter_grass;
+                m->grass4.x = randX;
+                m->grass4.y = randY;
+                m->grass4.width = randWidth;
+                m->grass4.height = randHeight;
+                break;
+            case 4:
+                mapxy(randX, randY) = ter_grass;
+                m->grass5.x = randX;
+                m->grass5.y = randY;
+                m->grass5.width = randWidth;
+                m->grass5.height = randHeight;
+                break;
+        }
+    }
+    for (i = 0; i < num_clearing; i++) {
+        randX = rand_range(1, MAP_X - 2);
+        randY = rand_range(1, MAP_Y - 2);
+        randWidth = rand_range(REGION_MIN_X, REGION_MAX_X);;
+        randHeight = rand_range(REGION_MIN_Y, REGION_MAX_Y);;
+        switch (i) {
+            case 0:
+                mapxy(randX, randY) = ter_clearing;
+                m->clearing1.x = randX;
+                m->clearing1.y = randY;
+                m->clearing1.width = randWidth;
+                m->clearing1.height = randHeight;
+                break;
+            case 1:
+                mapxy(randX, randY) = ter_clearing;
+                m->clearing2.x = randX;
+                m->clearing2.y = randY;
+                m->clearing2.width = randWidth;
+                m->clearing2.height = randHeight;
+                break;
+            case 2:
+                mapxy(randX, randY) = ter_clearing;
+                m->clearing3.x = randX;
+                m->clearing3.y = randY;
+                m->clearing3.width = randWidth;
+                m->clearing3.height = randHeight;
+                break;
+            case 3:
+                mapxy(randX, randY) = ter_clearing;
+                m->clearing4.x = randX;
+                m->clearing4.y = randY;
+                m->clearing4.width = randWidth;
+                m->clearing4.height = randHeight;
+                break;
+            case 4:
+                mapxy(randX, randY) = ter_clearing;
+                m->clearing5.x = randX;
+                m->clearing5.y = randY;
+                m->clearing5.width = randWidth;
+                m->clearing5.height = randHeight;
+                break;
+        }
+    }
+    for (i = 0; i < num_clearing; i++) {
+        randX = rand_range(1, MAP_X - 2);
+        randY = rand_range(1, MAP_Y - 2);
+        randWidth = rand_range(REGION_MIN_X, REGION_MAX_X);;
+        randHeight = rand_range(REGION_MIN_Y, REGION_MAX_Y);;
+        switch (i) {
+            case 0:
+                mapxy(randX, randY) = ter_mixed;
+                m->mixed1.x = randX;
+                m->mixed1.y = randY;
+                m->mixed1.width = randWidth;
+                m->mixed1.height = randHeight;
+                break;
+            case 1:
+                mapxy(randX, randY) = ter_mixed;
+                m->mixed2.x = randX;
+                m->mixed2.y = randY;
+                m->mixed2.width = randWidth;
+                m->mixed2.height = randHeight;
+                break;
+            case 2:
+                mapxy(randX, randY) = ter_mixed;
+                m->mixed3.x = randX;
+                m->mixed3.y = randY;
+                m->mixed3.width = randWidth;
+                m->mixed3.height = randHeight;
+                break;
+            case 3:
+                mapxy(randX, randY) = ter_mixed;
+                m->mixed4.x = randX;
+                m->mixed4.y = randY;
+                m->mixed4.width = randWidth;
+                m->mixed4.height = randHeight;
+                break;
+            case 4:
+                mapxy(randX, randY) = ter_mixed;
+                m->mixed5.x = randX;
+                m->mixed5.y = randY;
+                m->mixed5.width = randWidth;
+                m->mixed5.height = randHeight;
+                break;
         }
     }
 }
@@ -133,30 +250,288 @@ void check_neighbor(map_t *m, int source_x, int source_y)
         if(mapxy(x, y) == ter_grass){
             if(is_valid(m,x + x_moves[i],y + y_moves[i])){
                 m->map[y+ y_moves[i]][x+ x_moves[i]] = ter_grass;
-                check_neighbor(m,x + x_moves[i], y + y_moves[i]);
+//                check_neighbor(m,x + x_moves[i], y + y_moves[i]);
             }
         }
         if(mapxy(x, y) == ter_clearing){
             if(is_valid(m,x + x_moves[i],y + y_moves[i])) {
                 m->map[y+ y_moves[i]][x+ x_moves[i]] = ter_clearing;
-                check_neighbor(m, x + x_moves[i], y + y_moves[i]);
+//                check_neighbor(m, x + x_moves[i], y + y_moves[i]);
             }
         }
         if(mapxy(x, y) == ter_mixed){
             if(is_valid(m,x + x_moves[i],y + y_moves[i])) {
                 m->map[y+ y_moves[i]][x+ x_moves[i]] = ter_mixed;
-                check_neighbor(m, x + x_moves[i], y + y_moves[i]);
+//                check_neighbor(m, x + x_moves[i], y + y_moves[i]);
+            }
+        }
+    }
+}
+bool terrain_valid(map_t *m, int start_x, int start_y, int width, int height)
+{
+    if((start_x + width) >= MAP_X || (start_y + height) >= MAP_Y){return false;}
+
+    int x, y;
+    for(y = start_y; y < (start_y + height); y++){
+        for(x = start_x; x < (start_x + width); x++){
+            if(m->map[y][x] == empty || m->map[y + 1][x] == empty || m->map[y][x + 1] == empty
+            || m->map[y - 1][x] == empty || m->map[y][x - 1] == empty){return false;}
+        }
+    }
+    return true;
+}
+
+void create_mart(map_t *m) {
+    int i, height, width, tries = 0;
+    int randX, randY;
+    height = 2;
+    width = 2;
+
+    for (i = 1; i < 2; i++) {
+        tries++;
+        randX = rand_range(1, MAP_X);
+        randY = rand_range(1, MAP_Y);
+        if (!is_valid(m, randX, randY)) {
+            i -= 1;
+            continue;
+        } else {
+            // current cell is not a path
+            if (mapxy(randX, randY) != ter_path) {
+                if (mapxy(randX, randY + 1) == ter_path) {
+                    if (mapxy(randX, randY - 1) != ter_path
+                        && mapxy(randX - 1, randY - 1) != ter_path
+                        && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY - 1) = ter_mart;
+                        mapxy(randX + 1, randY - 1) = ter_mart;
+                        mapxy(randX + 1, randY) = ter_mart;
+                        break;
+                    } else if (mapxy(randX, randY - 1) != ter_path
+                               && mapxy(randX - 1, randY - 1) != ter_path
+                               && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY - 1) = ter_mart;
+                        mapxy(randX - 1, randY - 1) = ter_mart;
+                        mapxy(randX - 1, randY) = ter_mart;
+                        break;
+                    }
+                } else if (mapxy(randX, randY - 1) == ter_path) {
+                    if (mapxy(randX, randY + 1) != ter_path
+                        && mapxy(randX + 1, randY + 1) != ter_path
+                        && mapxy(randX + 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY + 1) = ter_mart;
+                        mapxy(randX + 1, randY + 1) = ter_mart;
+                        mapxy(randX + 1, randY) = ter_mart;
+                        break;
+                    } else if (mapxy(randX, randY + 1) != ter_path
+                        && mapxy(randX - 1, randY - 1) != ter_path
+                        && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY + 1) = ter_mart;
+                        mapxy(randX - 1, randY - 1) = ter_mart;
+                        mapxy(randX - 1, randY) = ter_mart;
+                        break;
+                    }
+                } else if (mapxy(randX + 1, randY) == ter_path) {
+                    if (mapxy(randX, randY - 1) != ter_path
+                        && mapxy(randX - 1, randY - 1) != ter_path
+                        && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY - 1) = ter_mart;
+                        mapxy(randX - 1, randY - 1) = ter_mart;
+                        mapxy(randX - 1, randY) = ter_mart;
+                        break;
+                    } else if (mapxy(randX, randY + 1) != ter_path
+                               && mapxy(randX - 1, randY + 1) != ter_path
+                               && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY + 1) = ter_mart;
+                        mapxy(randX - 1, randY + 1) = ter_mart;
+                        mapxy(randX - 1, randY) = ter_mart;
+                        break;
+                    }
+                } else if (mapxy(randX - 1, randY) == ter_path) {
+                    if (mapxy(randX, randY - 1) != ter_path
+                        && mapxy(randX + 1, randY - 1) != ter_path
+                        && mapxy(randX + 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY - 1) = ter_mart;
+                        mapxy(randX + 1, randY - 1) = ter_mart;
+                        mapxy(randX + 1, randY) = ter_mart;
+                        break;
+                    } else if (mapxy(randX, randY + 1) != ter_path
+                               && mapxy(randX + 1, randY) != ter_path
+                               && mapxy(randX + 1, randY + 1) != ter_path) {
+                        mapxy(randX, randY) = ter_mart;
+                        mapxy(randX, randY + 1) = ter_mart;
+                        mapxy(randX + 1, randY + 1) = ter_mart;
+                        mapxy(randX + 1, randY) = ter_mart;
+                        break;
+                    }
+                } else {
+                    i -= 1;
+                    continue;
+                }
             }
         }
     }
 }
 
-void create_terrain(map_t *m)
-{
-    generate_seeds(m);
+void create_center(map_t *m) {
+    int i, height, width, tries = 0;
+    int randX, randY;
+    height = 2;
+    width = 2;
 
+    for (i = 1; i < 2; i++) {
+        tries++;
+        randX = rand_range(1, MAP_X);
+        randY = rand_range(1, MAP_Y);
+        if (!is_valid(m, randX, randY)) {
+            i -= 1;
+            continue;
+        } else {
+            // current cell is not a path
+            if (mapxy(randX, randY) != ter_path) {
+                if (mapxy(randX, randY + 1) == ter_path) {
+                    if (mapxy(randX, randY - 1) != ter_path
+                        && mapxy(randX - 1, randY - 1) != ter_path
+                        && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_center;
+                        mapxy(randX, randY - 1) = ter_center;
+                        mapxy(randX + 1, randY - 1) = ter_center;
+                        mapxy(randX + 1, randY) = ter_center;
+                        break;
+                    } else if (mapxy(randX, randY - 1) != ter_path
+                               && mapxy(randX - 1, randY - 1) != ter_path
+                               && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_center;
+                        mapxy(randX, randY - 1) = ter_center;
+                        mapxy(randX - 1, randY - 1) = ter_center;
+                        mapxy(randX - 1, randY) = ter_center;
+                        break;
+                    }
+                } else if (mapxy(randX, randY - 1) == ter_path) {
+                    if (mapxy(randX, randY + 1) != ter_path
+                        && mapxy(randX + 1, randY + 1) != ter_path
+                        && mapxy(randX + 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_center;
+                        mapxy(randX, randY + 1) = ter_center;
+                        mapxy(randX + 1, randY + 1) = ter_center;
+                        mapxy(randX + 1, randY) = ter_center;
+                        break;
+                    } else if (mapxy(randX, randY + 1) != ter_path
+                               && mapxy(randX - 1, randY - 1) != ter_path
+                               && mapxy(randX - 1, randY) != ter_path) {
+                        mapxy(randX, randY) = ter_center;
+                        mapxy(randX, randY + 1) = ter_center;
+                        mapxy(randX - 1, randY - 1) = ter_center;
+                        mapxy(randX - 1, randY) = ter_center;
+                        break;
+                    }
+                } else if (mapxy(randX + 1, randY) == ter_path) {
+
+                } else if (mapxy(randX - 1, randY) == ter_path) {
+
+                } else {
+                    i -= 1;
+                    continue;
+                }
+            }
+        }
+    }
 }
 
+
+void create_terrain(map_t *m, int start_x, int start_y, int width, int height)
+{
+    int y,x, chance;
+    for(y = start_y; y < start_y + height; y++){
+        for(x = start_x; x < start_x + width; x++){
+//            if(terrain_valid(m, start_x, start_y, width, height)){
+                if((start_x + width) >= MAP_X || (start_y + height) >= MAP_Y){continue;}
+                if(mapxy(x, y) != empty){
+                    continue;
+                }
+                else{
+                    switch (mapxy(start_x, start_y)){
+                        case ter_grass:
+                            mapxy(x, y) = ter_grass;
+                            break;
+                        case ter_clearing:
+                            mapxy(x, y) = ter_clearing;
+                            break;
+                        case ter_mixed:
+                            chance = rand_range(0,5);
+                            if(chance == 0){
+                                mapxy(x, y) = ter_tree;
+                            }
+                            if(chance == 1 || chance == 2 || chance == 3){
+                                mapxy(x, y) = ter_clearing;
+                            }
+                            if(chance == 4){
+                                mapxy(x, y) = ter_boulder;
+                            }
+                            break;
+                    }
+                }
+//            }
+        }
+    }
+}
+void create_all_terrain(map_t *m)
+{
+    create_terrain(m,m->grass1.x, m->grass1.y, m->grass1.width,m->grass1.height);
+    create_terrain(m,m->grass2.x, m->grass2.y, m->grass2.width,m->grass2.height);
+    create_terrain(m,m->clearing1.x, m->clearing1.y, m->clearing1.width,m->clearing1.height);
+    create_terrain(m,m->clearing2.x, m->clearing2.y, m->clearing2.width,m->clearing2.height);
+    create_terrain(m,m->mixed1.x, m->mixed1.y, m->mixed1.width,m->mixed1.height);
+    create_terrain(m,m->mixed2.x, m->mixed2.y, m->mixed2.width,m->mixed2.height);
+switch (m->num_grass){
+    case 3:
+        create_terrain(m,m->grass3.x, m->grass3.y, m->grass3.width,m->grass3.height);
+        break;
+    case 4:
+        create_terrain(m,m->grass3.x, m->grass3.y, m->grass3.width,m->grass3.height);
+        create_terrain(m,m->grass4.x, m->grass4.y, m->grass4.width,m->grass4.height);
+        break;
+    case 5:
+        create_terrain(m,m->grass3.x, m->grass3.y, m->grass3.width,m->grass3.height);
+        create_terrain(m,m->grass4.x, m->grass4.y, m->grass4.width,m->grass4.height);
+        create_terrain(m,m->grass5.x, m->grass5.y, m->grass5.width,m->grass5.height);
+        break;
+}
+    switch (m->num_clearing){
+        case 3:
+            create_terrain(m,m->clearing3.x, m->clearing3.y, m->clearing3.width,m->clearing3.height);
+            break;
+        case 4:
+            create_terrain(m,m->clearing3.x, m->clearing3.y, m->clearing3.width,m->clearing3.height);
+            create_terrain(m,m->clearing4.x, m->clearing4.y, m->clearing4.width,m->clearing4.height);
+            break;
+        case 5:
+            create_terrain(m,m->clearing3.x, m->clearing3.y, m->clearing3.width,m->clearing3.height);
+            create_terrain(m,m->clearing4.x, m->clearing4.y, m->clearing4.width,m->clearing4.height);
+            create_terrain(m,m->clearing5.x, m->clearing5.y, m->clearing5.width,m->clearing5.height);
+            break;
+    }
+    switch (m->num_mixed){
+        case 3:
+            create_terrain(m,m->mixed3.x, m->mixed3.y, m->mixed3.width,m->mixed3.height);
+            break;
+        case 4:
+            create_terrain(m,m->mixed3.x, m->mixed3.y, m->mixed3.width,m->mixed3.height);
+            create_terrain(m,m->mixed4.x, m->mixed4.y, m->mixed4.width,m->mixed4.height);
+            break;
+        case 5:
+            create_terrain(m,m->mixed3.x, m->mixed3.y, m->mixed3.width,m->mixed3.height);
+            create_terrain(m,m->mixed4.x, m->mixed4.y, m->mixed4.width,m->mixed4.height);
+            create_terrain(m,m->mixed5.x, m->mixed5.y, m->mixed5.width,m->mixed5.height);
+            break;
+    }
+
+}
 static int clear_map(map_t *m)
 {
     uint8_t x, y;
@@ -199,6 +574,7 @@ void create_exits(map_t *m)
         m->exits[i].x = exit_x[i];
     }
 }
+
 void connect_paths(map_t *m, int end_x, int end_y, int start_x, int start_y)
 {
     int x,y;
