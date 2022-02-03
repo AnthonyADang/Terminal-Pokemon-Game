@@ -1,7 +1,23 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-commit f4929cbe3aa2f6d718a55f398e9df39c47399d71 (HEAD -> assignment1.1, origin/assignment1.1)
+commit 88899cd1dfd59f0773722d4e07269fb4672c2ecb (HEAD -> assignment1.1, origin/assignment1.1)
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 2 21:10:45 2022 -0600
+
+    Added pokemarts and pokecenters
+
+    Added notes regarding bugs to readme
+
+commit 1c60d8fc11a0ca29c7f4c2ba57732980dbe300c6
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 2 17:20:43 2022 -0600
+
+    updated CHANGELOG
+
+    changelog updated
+
+commit f4929cbe3aa2f6d718a55f398e9df39c47399d71
 Author: adang <adang@iastate.edu>
 Date:   Wed Feb 2 17:18:49 2022 -0600
 
