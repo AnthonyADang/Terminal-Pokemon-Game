@@ -1,0 +1,46 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+commit 88899cd1dfd59f0773722d4e07269fb4672c2ecb (HEAD -> assignment1.1, origin/assignment1.1)
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 2 21:10:45 2022 -0600
+
+    Added pokemarts and pokecenters
+
+    Added notes regarding bugs to readme
+
+commit 1c60d8fc11a0ca29c7f4c2ba57732980dbe300c6
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 2 17:20:43 2022 -0600
+
+    updated CHANGELOG
+
+    changelog updated
+
+commit f4929cbe3aa2f6d718a55f398e9df39c47399d71
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 2 17:18:49 2022 -0600
+
+    Updated map generation methods
+
+    map.c can now print out map border, terrain seed locations, and paths. There are some bugs with path generation that causes characters to shift out of frame. Some methods like  create terrain still are not functioning. Create paths method needs to be refactored.
+
+commit 444ea216956f348d9a4861beb13f4ab8996ea826
+Author: adang <adang@iastate.edu>
+Date:   Mon Jan 31 21:51:47 2022 -0600
+
+    Update CHANGELOG
+
+commit 602e46c32a1015bbd9c20895c5cfb6c294074df9
+Author: adang <adang@iastate.edu>
+Date:   Mon Jan 31 21:45:15 2022 -0600
+
+    Added changelog
+
+    Added changelog
+
+commit 306b31a76b1fb7c00ac4f732a04dbb9de06628fb (origin/main, origin/assignment1.2, origin/HEAD, main, assignment1.2)
+Author: adang <adang@iastate.edu>
+Date:   Mon Jan 31 21:30:11 2022 -0600
+
+    Created project. Added MakeFile, README, map.c, map.h files

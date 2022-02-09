@@ -1,0 +1,15 @@
+COM S 327 Poke-dungeon Terminal Game
+
+## Assignment 1.1 Terrain Generation
+    In this iteration of the project, I created the base skeleton of the map
+    by generating the map borders, terrain(grass, clearings, rocks/boulders,
+    trees, paths, pokemon centers, pokemon marts, and exits. Seeds for each
+    terrain type is generated randomly and grown outwardly. Paths are then
+    generated between exits N-S and W-E.
+
+## Assignment 1.2 Moving from map to map
+    In this iteration of the project, I used the solution for 1.1 as
+    the base for my assignment 1.2. The commands provided are n, s, e, w, f, q.
+    the first 4 stand for the direction you want to travel. f requires you to
+    input f followed by two integers (EX: f 10 5). Inputting q frees allocated
+    memory and closes the program.

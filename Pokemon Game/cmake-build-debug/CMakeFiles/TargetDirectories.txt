@@ -1,0 +1,3 @@
+C:/Users/adang/Github/Terminal-Pokemon-Game/Pokemon Game/cmake-build-debug/CMakeFiles/Pokemon_Game.dir
+C:/Users/adang/Github/Terminal-Pokemon-Game/Pokemon Game/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/adang/Github/Terminal-Pokemon-Game/Pokemon Game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
