@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+commit c5f1d2a926cbbeaaf675c01fb5dfa6c32c9b9383 (HEAD -> assignment1.2, origin/assignment1.2)
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 9 06:45:31 2022 -0600
+
+    Added functionality to move from map to map
+
+    user can now input commands to move between different map coordinates
+    
 commit 88899cd1dfd59f0773722d4e07269fb4672c2ecb (HEAD -> assignment1.1, origin/assignment1.1)
 Author: adang <adang@iastate.edu>
 Date:   Wed Feb 2 21:10:45 2022 -0600
