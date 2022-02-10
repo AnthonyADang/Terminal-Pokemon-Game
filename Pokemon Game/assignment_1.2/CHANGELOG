@@ -1,14 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-commit c5f1d2a926cbbeaaf675c01fb5dfa6c32c9b9383 (HEAD -> assignment1.2, origin/assignment1.2)
+commit 04367663664283fc54a63e1d18bd612d09f503b0 (HEAD -> assignment1.2, origin/assignment1.2)
+Author: adang <adang@iastate.edu>
+Date:   Wed Feb 9 22:17:35 2022 -0600
+
+    updated pokedungeon to have center/mart spawn probability and edge maps in the world have respective exits removed
+
+    World edge maps with respective sides on edge of world do not have exits. Pokemarts and Pokecenters have a decreasing probability to spawn the farther you go from the center map.
+
+commit c5f1d2a926cbeaaf675c01fb5dfa6c32c9b9383 (HEAD -> assignment1.2, origin/assignment1.2)
 Author: adang <adang@iastate.edu>
 Date:   Wed Feb 9 06:45:31 2022 -0600
 
     Added functionality to move from map to map
 
     user can now input commands to move between different map coordinates
-    
+
 commit 88899cd1dfd59f0773722d4e07269fb4672c2ecb (HEAD -> assignment1.1, origin/assignment1.1)
 Author: adang <adang@iastate.edu>
 Date:   Wed Feb 2 21:10:45 2022 -0600
