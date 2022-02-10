@@ -47,6 +47,7 @@ typedef uint8_t pair_t[num_dims];
 #define mapxy(x, y) (m->map[y][x])
 #define heightpair(pair) (m->height[pair[dim_y]][pair[dim_x]])
 #define heightxy(x, y) (m->height[y][x])
+#define building_freq(d) ((((-45.0 * d) / 200.0) + 50.0))
 
 typedef enum __attribute__ ((__packed__)) terrain_type {
   ter_debug,
@@ -405,16 +406,18 @@ static int place_pokemart(map_t *m)
 
   find_building_location(m, p);
 
-  mapxy(p[dim_x]    , p[dim_y]    ) = ter_mart;
-  mapxy(p[dim_x] + 1, p[dim_y]    ) = ter_mart;
-  mapxy(p[dim_x]    , p[dim_y] + 1) = ter_mart;
-  mapxy(p[dim_x] + 1, p[dim_y] + 1) = ter_mart;
+   mapxy(p[dim_x]    , p[dim_y]    ) = ter_mart;
+   mapxy(p[dim_x] + 1, p[dim_y]    ) = ter_mart;
+   mapxy(p[dim_x]    , p[dim_y] + 1) = ter_mart;
+   mapxy(p[dim_x] + 1, p[dim_y] + 1) = ter_mart;
 
+  
   return 0;
 }
 
 static int place_center(map_t *m)
-{  pair_t p;
+{
+  pair_t p;
 
   find_building_location(m, p);
 
@@ -628,13 +631,37 @@ static int place_trees(map_t *m)
 
 static int new_map(map_t *m, uint8_t n, uint8_t s, uint8_t e, uint8_t w, uint8_t y, uint8_t x)
 {
+  double d;
+  
   smooth_height(m);
   map_terrain(m, n, s, e, w);
   place_boulders(m);
   place_trees(m);
   build_paths(m);
-  place_pokemart(m);
-  place_center(m);
+  d = abs(199 - x) + abs(199 - y);
+  
+    if(y == W_ORIGIN_Y && x == W_ORIGIN_X){
+      place_pokemart(m);
+    } else if((rand() % 100) < building_freq(d)){
+      place_pokemart(m);
+  }
+    if(y == W_ORIGIN_Y && x == W_ORIGIN_X){
+      place_center(m);
+    } else if((rand() % 100) < building_freq(d)){
+      place_center(m);
+  }
+    if(world_y == 0){
+      m->map[0][n] = ter_boulder;
+    }
+    if(world_y == WORLD_Y){
+      m->map[MAP_Y - 1][s] = ter_boulder;
+    }
+    if(world_x == 0){
+      m->map[w][0] = ter_boulder;
+    }
+    if(world_x == WORLD_X){
+      m->map[e][MAP_X - 1] = ter_boulder;
+    }
 
   return 0;
 }
@@ -714,7 +741,7 @@ static int go_to_map(int y, int x){
     new_map(world[world_y][world_x], n, s, e, w, y, x);
     print_map(world[world_y][world_x]);
   }
-  printf("Current world location is (x,y): (%d,%d)\n", world_x - 200, world_y - 200);
+  printf("Current world location is (x,y): (%d,%d)\n", world_x - 199, world_y - 199);
   
   return 0;
 }
@@ -766,8 +793,8 @@ The commands are:\n\
     switch(input){
       
     case 'n':
-      if(!(world_y == WORLD_Y)){
-	world_y += 1;
+      if(!(world_y == 0)){
+	world_y -= 1;
 	go_to_map(world_y,world_x);
       } else{
 	go_to_map(world_y,world_x);
@@ -776,8 +803,8 @@ The commands are:\n\
       break;
       
     case 's':
-      if(!(world_y == 0)){
-	world_y -= 1;
+      if(!(world_y == WORLD_Y)){
+	world_y += 1;
 	go_to_map(world_y,world_x);
       }else{
 	go_to_map(world_y,world_x);
@@ -810,7 +837,7 @@ The commands are:\n\
       if(y >= 0 && y <= WORLD_Y && x >= 0 && x <= WORLD_X){
 	world_x = x;
 	world_y = y;
-	go_to_map(y,x);
+	go_to_map(world_y,world_x);
       } else{
 	printf("You have entered an invalid location.");
       }
